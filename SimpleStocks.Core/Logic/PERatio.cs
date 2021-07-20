@@ -8,6 +8,10 @@ namespace SimpleStocks.Core.Logic
     {
         public decimal CalculatePERatio(int dividend, int price)
         {
+            if (dividend.Equals(0))
+            {
+                throw new DivideByZeroException();
+            }
            return Decimal.Divide(price, dividend);
    
         }

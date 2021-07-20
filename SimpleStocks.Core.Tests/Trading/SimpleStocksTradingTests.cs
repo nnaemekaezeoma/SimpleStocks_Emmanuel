@@ -13,7 +13,6 @@ namespace SimpleStocks.Core.Trading
         private readonly Mock<ISimpleStocksRepository> _simpleStocksRepositoryMock;
         private readonly SimpleStocksTrading _trading;
         private readonly List<Trade> _tradeIntervalData;
-        private TradeCalculationRequest _request;
         private Trade _tradeData;
         private readonly static int _precision = 2;
 
@@ -52,7 +51,6 @@ namespace SimpleStocks.Core.Trading
             };
 
             _simpleStocksRepositoryMock = new Mock<ISimpleStocksRepository>();
-            _request = new TradeCalculationRequest();
             _trading = new SimpleStocksTrading(_stockList, _tradeIntervalData, _simpleStocksRepositoryMock.Object, _precision);
         }
 
@@ -61,32 +59,28 @@ namespace SimpleStocks.Core.Trading
         [Fact]
         public void ShouldthrowExceptionIfRequestIsNull()
         {
-            _request = null;
-            var exception = Assert.Throws<ArgumentNullException>(() => _trading.GetDividendYield(_request));
+            var exception = Assert.Throws<ArgumentNullException>(() => _trading.GetDividendYield(null));
             Assert.Equal("RequestItem", exception.ParamName);
         }
 
         [Fact]
         public void ShouldReturnArgumentExceptionIfPriceIsZero()
         {
-            _request.stock = "GIN";
-            _request.price = 0;
-            var exception = Assert.Throws<ArgumentException>(() => _trading.GetDividendYield(_request));
+            var exception = Assert.Throws<ArgumentException>(() => _trading.GetDividendYield(new TradeCalculationRequest { price = 0, stock = "GIN" }));
             Assert.Equal("price", exception.Message);
         }
 
         [Fact]
         public void ShouldReturnArgumentExceptionIfstockIsEmptyString()
         {
-            _request.price = 10;
-            var exception = Assert.Throws<ArgumentException>(() => _trading.GetDividendYield(_request));
+            var exception = Assert.Throws<ArgumentException>(() => _trading.GetDividendYield(new TradeCalculationRequest { price = 60, stock = "" }));
             Assert.Equal("stock", exception.Message);
         }
 
         [Fact]
         public void ShouldReturnStockDoesNotExistException()
         {
-            var exception = Assert.Throws<KeyNotFoundException>(() => _trading.GetDividendYield(_request));
+            var exception = Assert.Throws<KeyNotFoundException>(() => _trading.GetDividendYield(new TradeCalculationRequest { price = 60, stock = "TIM" }));
             Assert.Equal("Stock does not exist", exception.Message);
         }
 
@@ -96,10 +90,10 @@ namespace SimpleStocks.Core.Trading
         {
 
             //Act
-            decimal result = _trading.GetDividendYield(_request);
+            decimal result = _trading.GetDividendYield(new TradeCalculationRequest { price = 60, stock = "ALE" });
             //Assert
             Assert.NotEqual(0, result);
-
+           
         }
 
         [Fact]
@@ -107,17 +101,17 @@ namespace SimpleStocks.Core.Trading
         {
 
             //Act
-            decimal result = _trading.GetPERatio(_request);
+            decimal result = _trading.GetPERatio(new TradeCalculationRequest { price = 20, stock = "POP" });
 
             //Assert
             Assert.NotEqual(0, result);
+            Assert.Throws<DivideByZeroException>(() => _trading.GetPERatio(new TradeCalculationRequest { price = 20, stock = "TEA" }));
         }
 
         [Fact]
         public void ShouldthrowExceptionIfTradeDataIsNull()
         {
-            _tradeData = null;
-            var exception = Assert.Throws<ArgumentNullException>(() => _trading.RecordTrade(_tradeData));
+            var exception = Assert.Throws<ArgumentNullException>(() => _trading.RecordTrade(null));
             Assert.Equal("tradeRequest", exception.ParamName);
             _simpleStocksRepositoryMock.Verify(x => x.Save(It.IsAny<Trade>()), Times.Never);
         }
