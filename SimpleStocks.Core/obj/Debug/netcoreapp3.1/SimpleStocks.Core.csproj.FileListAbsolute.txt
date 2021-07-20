@@ -1,0 +1,9 @@
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\bin\Debug\netcoreapp3.1\SimpleStocks.Core.deps.json
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\bin\Debug\netcoreapp3.1\SimpleStocks.Core.dll
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\bin\Debug\netcoreapp3.1\SimpleStocks.Core.pdb
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\obj\Debug\netcoreapp3.1\SimpleStocks.Core.AssemblyInfoInputs.cache
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\obj\Debug\netcoreapp3.1\SimpleStocks.Core.AssemblyInfo.cs
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\obj\Debug\netcoreapp3.1\SimpleStocks.Core.csproj.CoreCompileInputs.cache
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\obj\Debug\netcoreapp3.1\SimpleStocks.Core.dll
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\obj\Debug\netcoreapp3.1\SimpleStocks.Core.pdb
+C:\Users\eezeoma\source\repos\SimpleStocks\SimpleStocks.Core\obj\Debug\netcoreapp3.1\SimpleStocks.Core.csprojAssemblyReference.cache
