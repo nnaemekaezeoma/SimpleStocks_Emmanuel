@@ -101,6 +101,7 @@ namespace SimpleStocks.Core.Trading
         public void ShouldCalculatePERatio()
         {
 
+            //Act
             //For Any Stock Given any price as input,  calculate the P/E Ratio
             decimal result = _trading.GetPERatio(new TradeCalculationRequest { price = 20, stock = "POP" });
 
@@ -120,6 +121,7 @@ namespace SimpleStocks.Core.Trading
         [Fact]
         public void ShouldSaveATrade()
         {
+            //Act
             //For Any Stock, Record a trade, with timestamp, quantity, buy or sell indicator and price
             Trade recordTrade = null;
             _tradeData = new Trade { symbol = "TEA", quantity = 100, price = 10, timestamp = DateTime.Now, tradeIndicator = TradeIndicator.SELL };
@@ -140,7 +142,8 @@ namespace SimpleStocks.Core.Trading
         public void ShouldCalculateVolumeWeightedStockPrice()
         {
 
-            //Act Calculate Volume Weighted stock price in the past 5 mins
+            //Act
+            //For Any Stock, Calculate Volume Weighted stock price in the past 5 mins
             decimal result = _trading.GetVWSP(new VWSPRequest { symbol = "TEA", timeInMinutes = 5 });
 
             //Assert
@@ -153,7 +156,8 @@ namespace SimpleStocks.Core.Trading
         public void ShouldCalculateAllShareIndex()
         {
 
-            //Act 
+            //Act
+            //Calculate All Share Index using the geometric mean of the Volume Weighted Stock Price for all stocks
             double result = _trading.AllShareIndex(30);
 
             //Assert
