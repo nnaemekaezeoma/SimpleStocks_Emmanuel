@@ -90,6 +90,7 @@ namespace SimpleStocks.Core.Trading
         {
 
             //Act
+            //For Any Stock Given any price as input,  calculate Dividend yield
             decimal result = _trading.GetDividendYield(new TradeCalculationRequest { price = 60, stock = "ALE" });
             //Assert
             Assert.NotEqual(0, result);
@@ -100,7 +101,7 @@ namespace SimpleStocks.Core.Trading
         public void ShouldCalculatePERatio()
         {
 
-            //Act
+            //For Any Stock Given any price as input,  calculate the P/E Ratio
             decimal result = _trading.GetPERatio(new TradeCalculationRequest { price = 20, stock = "POP" });
 
             //Assert
@@ -119,6 +120,7 @@ namespace SimpleStocks.Core.Trading
         [Fact]
         public void ShouldSaveATrade()
         {
+            //For Any Stock, Record a trade, with timestamp, quantity, buy or sell indicator and price
             Trade recordTrade = null;
             _tradeData = new Trade { symbol = "TEA", quantity = 100, price = 10, timestamp = DateTime.Now, tradeIndicator = TradeIndicator.SELL };
             _simpleStocksRepositoryMock.Setup(x => x.Save(It.IsAny<Trade>()))
@@ -138,7 +140,7 @@ namespace SimpleStocks.Core.Trading
         public void ShouldCalculateVolumeWeightedStockPrice()
         {
 
-            //Act
+            //Act Calculate Volume Weighted stock price in the past 5 mins
             decimal result = _trading.GetVWSP(new VWSPRequest { symbol = "TEA", timeInMinutes = 5 });
 
             //Assert
@@ -151,7 +153,7 @@ namespace SimpleStocks.Core.Trading
         public void ShouldCalculateAllShareIndex()
         {
 
-            //Act
+            //Act 
             double result = _trading.AllShareIndex(30);
 
             //Assert
