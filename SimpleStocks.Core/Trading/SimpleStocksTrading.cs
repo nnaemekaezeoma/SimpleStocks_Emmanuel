@@ -72,6 +72,7 @@ namespace SimpleStocks.Core.Trading
         //Get all Share Index
         public double AllShareIndex(int cutofftimeInMinutes)
         {
+            int n = 0;
             decimal VMPrice = 1;
             List<Trade> stockTrade = new List<Trade>();
             VolumeWeightedStockPrice _VWPrice = new VolumeWeightedStockPrice();
@@ -88,9 +89,10 @@ namespace SimpleStocks.Core.Trading
                 {
                     //get volume Weighted stock price and multiply with the previous stock volume Weighted stock price
                     VMPrice *= _VWPrice.CalculateVolumeWeightedStockPrice(stockTrade);
+                    n++;
                 }
             }
-            double root = (double)Decimal.Divide(1, _stocks.Count);
+            double root = (double)Decimal.Divide(1, n);
             double allShareIndex = Math.Pow((double)VMPrice, root);
             //round to provided precision
             return Math.Round(allShareIndex, _precision);
