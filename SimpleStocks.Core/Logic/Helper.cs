@@ -21,7 +21,7 @@ namespace SimpleStocks.Core.Logic
                 throw new ArgumentException(nameof(RequestItem.stock));
             }
 
-            if (RequestItem.price == 0)
+            if (RequestItem.price <= 0)
             {
                 throw new ArgumentException(nameof(RequestItem.price));
             }
