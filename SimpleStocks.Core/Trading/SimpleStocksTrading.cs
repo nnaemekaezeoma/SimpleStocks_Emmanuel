@@ -77,7 +77,7 @@ namespace SimpleStocks.Core.Trading
             List<Trade> stockTrade = new List<Trade>();
             VolumeWeightedStockPrice _VWPrice = new VolumeWeightedStockPrice();
 
-            if (cutofftimeInMinutes < 0)
+            if (cutofftimeInMinutes <= 0)
             {
                 throw new ArgumentException();
             }
@@ -91,6 +91,10 @@ namespace SimpleStocks.Core.Trading
                     VMPrice *= _VWPrice.CalculateVolumeWeightedStockPrice(stockTrade);
                     n++;
                 }
+            }
+            if (n == 0)
+            {
+                throw new ArithmeticException();
             }
             double root = (double)Decimal.Divide(1, n);
             double allShareIndex = Math.Pow((double)VMPrice, root);
