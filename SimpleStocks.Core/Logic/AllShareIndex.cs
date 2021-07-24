@@ -10,6 +10,7 @@ namespace SimpleStocks.Core.Logic
         public double CalculateAllShareIndex(List<Trade> tradeData, List<Stock> stocks, int cutofftimeInMinutes)
         {
             int n = 0;
+            double root = 0, allShareIndex = 0;
             decimal VMPrice = 1;
             List<Trade> stockTrade = new List<Trade>();
             VolumeWeightedStockPrice _VWPrice = new VolumeWeightedStockPrice();
@@ -27,8 +28,8 @@ namespace SimpleStocks.Core.Logic
             {
                 throw new ArithmeticException();
             }
-            double root = (double)Decimal.Divide(1, n);
-            double allShareIndex = Math.Pow((double)VMPrice, root);
+            root = (double)Decimal.Divide(1, n);
+            allShareIndex = Math.Pow((double)VMPrice, root);
             return allShareIndex;
         }
     }
