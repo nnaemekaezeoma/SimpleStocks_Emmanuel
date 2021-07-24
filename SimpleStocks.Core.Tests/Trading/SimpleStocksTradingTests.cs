@@ -158,11 +158,11 @@ namespace SimpleStocks.Core.Trading
 
             //Act
             //Calculate All Share Index using the geometric mean of the Volume Weighted Stock Price for all stocks
-            double result = _trading.AllShareIndex(30);
+            double result = _trading.GetAllShareIndex(30);
 
             //Assert
             Assert.NotEqual(0, result);
-            Assert.Throws<ArgumentException>(() => _trading.AllShareIndex(-30));
+            Assert.Throws<ArgumentException>(() => _trading.GetAllShareIndex(-30));
         }
     }
 }

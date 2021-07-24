@@ -70,34 +70,15 @@ namespace SimpleStocks.Core.Trading
         }
 
         //Get all Share Index
-        public double AllShareIndex(int cutofftimeInMinutes)
+        public double GetAllShareIndex(int cutofftimeInMinutes)
         {
-            int n = 0;
-            decimal VMPrice = 1;
-            List<Trade> stockTrade = new List<Trade>();
-            VolumeWeightedStockPrice _VWPrice = new VolumeWeightedStockPrice();
-
+            AllShareIndex data = new AllShareIndex();
             if (cutofftimeInMinutes <= 0)
             {
                 throw new ArgumentException();
             }
 
-            foreach (Stock stock in _stocks)
-            {
-                stockTrade = Helper.IntervalStockTradedIntimePeriod(_tradeData, stock.symbol, cutofftimeInMinutes);
-                if (stockTrade.Count > 0)
-                {
-                    //get volume Weighted stock price and multiply with the previous stock volume Weighted stock price
-                    VMPrice *= _VWPrice.CalculateVolumeWeightedStockPrice(stockTrade);
-                    n++;
-                }
-            }
-            if (n == 0)
-            {
-                throw new ArithmeticException();
-            }
-            double root = (double)Decimal.Divide(1, n);
-            double allShareIndex = Math.Pow((double)VMPrice, root);
+            double allShareIndex = data.CalculateAllShareIndex(_tradeData, _stocks, cutofftimeInMinutes);
             //round to provided precision
             return Math.Round(allShareIndex, _precision);
         }
